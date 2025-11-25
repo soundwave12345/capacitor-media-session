@@ -104,6 +104,7 @@ public class MediaSessionPlugin extends Plugin {
 
         final boolean httpUrl = url.startsWith("http");
         if (httpUrl) {
+            Log.d(TAG, "Converting artwork from URL");
             HttpURLConnection connection = (HttpURLConnection) (new URL(url)).openConnection();
             connection.setDoInput(true);
             connection.connect();
@@ -132,6 +133,7 @@ public class MediaSessionPlugin extends Plugin {
         for (JSONObject artwork : artworkList) {
             String src = artwork.getString("src");
             if (src != null) {
+                Log.d(TAG, "Found Artwork src");
                 this.artwork = urlToBitmap(src);
             }
         }
