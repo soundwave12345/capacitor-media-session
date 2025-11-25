@@ -288,11 +288,16 @@ public class MediaSessionService extends Service {
         }
 
         if (notificationUpdate && notificationBuilder != null) {
-            notificationBuilder
+            Notification notification = notificationBuilder 
                     .setContentTitle(title)
                     .setContentText(artist + " - " + album)
-                    .setLargeIcon(artwork);
-            notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
+                    .setLargeIcon(artwork)
+                    .build(); 
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                startForeground(NOTIFICATION_ID, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK);
+            } else {
+                startForeground(NOTIFICATION_ID, notification);
+            }
             notificationUpdate = false;
         }
     }
