@@ -276,6 +276,7 @@ public class MediaSessionService extends Service {
         }
 
         if (mediaMetadataUpdate && mediaMetadataBuilder != null) {
+            Log.d(TAG, "MediadataUpdate with info");
             mediaMetadataBuilder
                     .putString(MediaMetadataCompat.METADATA_KEY_TITLE, title)
                     .putString(MediaMetadataCompat.METADATA_KEY_ARTIST, artist)
