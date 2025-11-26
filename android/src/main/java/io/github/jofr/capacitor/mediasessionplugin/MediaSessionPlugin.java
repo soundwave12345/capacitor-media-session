@@ -10,6 +10,9 @@ import android.os.IBinder;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.util.Base64;
 import android.util.Log;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
+import android.graphics.Bitmap;
 
 import androidx.core.content.ContextCompat;
 
