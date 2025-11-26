@@ -99,6 +99,10 @@ public class MediaSessionPlugin extends Plugin {
     }
 
     private Bitmap loadBitmapWithGlide(Context context, String url) {
+        //if url is escaped
+        url = url.replace("Http:\\/\\/", "http://");
+        url = url.replace("HTTPS:\\/\\/", "https://");
+        url = url.replace("\\/", "/");
         try {
             return Glide.with(context)
                 .asBitmap()
