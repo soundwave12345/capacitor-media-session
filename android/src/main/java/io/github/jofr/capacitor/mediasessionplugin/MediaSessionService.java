@@ -277,6 +277,11 @@ public class MediaSessionService extends Service {
 
         if (mediaMetadataUpdate && mediaMetadataBuilder != null) {
             Log.d(TAG, "MediadataUpdate with info");
+            if (artwork != null) {
+                Log.d(TAG, "Artwork loaded: " + artwork.getWidth() + "x" + artwork.getHeight());
+            } else {
+                Log.d(TAG, "Artwork is NULL");
+            }
             mediaMetadataBuilder
                     .putString(MediaMetadataCompat.METADATA_KEY_TITLE, title)
                     .putString(MediaMetadataCompat.METADATA_KEY_ARTIST, artist)
