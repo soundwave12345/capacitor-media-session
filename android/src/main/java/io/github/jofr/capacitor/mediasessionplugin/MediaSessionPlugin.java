@@ -95,7 +95,18 @@ public class MediaSessionPlugin extends Plugin {
         service.update();
     }
 
-
+    private Bitmap loadBitmapWithGlide(Context context, String url) {
+        try {
+            return Glide.with(context)
+                .asBitmap()
+                .load(url)
+                .submit()
+                .get();
+        } catch (Exception e) {
+            Log.e(TAG, "Glide failed", e);
+            return null;
+        }
+    }
     private Bitmap urlToBitmap(String url) throws IOException {
         final boolean blobUrl = url.startsWith("blob:");
         if (blobUrl) {
@@ -127,6 +138,7 @@ public class MediaSessionPlugin extends Plugin {
         title = call.getString("title", title);
         artist = call.getString("artist", artist);
         album = call.getString("album", album);
+        
 
         final JSArray artworkArray = call.getArray("artwork");
         final List<JSONObject> artworkList = artworkArray.toList();
@@ -134,7 +146,8 @@ public class MediaSessionPlugin extends Plugin {
             String src = artwork.getString("src");
             if (src != null) {
                 Log.d(TAG, "Found Artwork src");
-                this.artwork = urlToBitmap(src);
+                this.artwork = loadBitmapWithGlide(getContext(), src);
+                //this.artwork = urlToBitmap(src);
             }
         }
 
